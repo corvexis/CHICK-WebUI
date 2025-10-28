@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chicken Coop Dashboard</title>
+
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background-image: url("https://raw.githubusercontent.com/corvexis/CHICK-WebUI/master/chicken.webp");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .dashboard {
+      background-color: navajowhite;
+      width: 80%;
+      max-width: 900px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      padding: 30px;
+    }
+
+    .dashboard h1 {
+      text-align: center;
+      color: #ff7b00;
+      margin-bottom: 30px;
+    }
+
+    .cards {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .card {
+      background-color: #f5f5dc;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 250px;
+      padding: 20px;
+      text-align: center;
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .card h2 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .value {
+      font-size: 28px;
+      font-weight: bold;
+      color: #ff7b00;
+      margin-bottom: 10px;
+    }
+
+    .status {
+      font-size: 16px;
+      color: #555;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="dashboard">
+    <h1>Chicken Coop Data Monitor</h1>
+
+    <div class="cards">
+      <!-- Ammonia Level -->
+      <div class="card">
+        <h2>Ammonia Level</h2>
+        <div class="value" id="ammonia">15 ppm</div>
+        <div class="status">Safe Level</div>
+      </div>
+
+      <!-- Water Level -->
+      <div class="card">
+        <h2>Water Level</h2>
+        <div class="value" id="water">75%</div>
+        <div class="status">Sufficient</div>
+      </div>
+
+      <!-- Feeding Time -->
+      <div class="card">
+        <h2>Feeding Time</h2>
+        <div class="value" id="feed">08:00 AM</div>
+        <div class="status">Next feeding soon</div>
+      </div>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+
+</html>
+
+<div class="feed-section">
+  <button class="feed-button" onclick="sendCommand('feed')">
+    Feed Chickens
+  </button>
+  <button class="refill-water-button" onclick="sendCommand('refill')">
+    Refill Water
+  </button>
+</div>
+
+<div id="status" style="
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+    color: #000000;
+  ">
+  Status: Idle
+</div>
+
+<style>
+  .feed-section {
+    text-align: center;
+    margin-top: 30px;
+  }
+
+  .feed-button {
+    background-color: #ff7b00;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 15px 40px;
+    font-size: 18px;
+    cursor: pointer;
+    transition:
+      background-color 0.3s ease,
+      transform 0.2s ease;
+  }
+
+  .feed-button:hover {
+    background-color: #e66a00;
+    transform: scale(1.05);
+  }
+
+  .refill-water-section {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .refill-water-button {
+    background-color: #ff7b00;
+    color: white;
+    border: none;
+    margin: 10px;
+    border-radius: 12px;
+    padding: 15px 40px;
+    font-size: 18px;
+    cursor: pointer;
+    transition:
+      background-color 0.3s ease,
+      transform 0.2s ease;
+  }
+
+  .refill-water-button:hover {
+    background-color: #e66a00;
+    transform: scale(1.05);
+  }
+</style>
