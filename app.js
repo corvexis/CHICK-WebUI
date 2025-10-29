@@ -1,22 +1,27 @@
+const ARDUINO_IP = "http://192.168.4.1"; // R4 IP address when connected to its AP
+
 function sendCommand(action) {
-  console.log(`Button pressed: ${action}`);
-
-  // Simulate sending a request to Arduino (will later use fetch)
-  console.log(`Simulating request to: /${action}`);
-
-  let simulatedResponse = "";
-
-  if (action === "feed") {
-    simulatedResponse = "Feeding chickens... done!";
-  } else if (action === "refill") {
-    simulatedResponse = "Refilling water... done!";
-  } else {
-    simulatedResponse = "Unknown action.";
-  }
-
-  console.log(`Simulated response: ${simulatedResponse}`);
-
-  // Update on-screen status
-  const statusElement = document.getElementById("status");
-  statusElement.innerText = "Status: " + simulatedResponse;
+  fetch(`${ARDUINO_IP}/${action}`)
+    .then(res => res.text())
+    .then(data => {
+      console.log(`Response: ${data}`);
+      document.getElementById("status").innerText = "Status: " + data;
+    })
+    .catch(err => console.error(err));
 }
+
+function updateStatus() {
+  fetch(`${ARDUINO_IP}/status`)
+    .then(res => res.text())
+    .then(data => {
+      const params = new URLSearchParams(data);
+      document.getElementById("ammonia").innerText = params.get("NH3");
+      document.getElementById("water").innerText = params.get("Water");
+      document.getElementById("time").innerText = params.get("Time");
+      document.getElementById("nextFeed").innerText = params.get("NextFeed");
+    })
+    .catch(err => console.error("Status fetch failed:", err));
+}
+
+setInterval(updateStatus, 3000); // Update every 3 seconds
+
